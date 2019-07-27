@@ -1,0 +1,212 @@
+.wrapper{
+    margin:0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header{
+    width:100%;
+    height: 100px;
+    background-color: #eceaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    box-shadow: 0px 3px 0px #c4c3c3
+}
+.header__btn{
+    width: 90px;
+    height: 30px;
+    background-color: #2d38d1;
+    color:#fff;
+    border:none;
+    border-radius: 3px;
+    transition: box-shadow, background-color .3s linear;
+}
+.header__btn:hover{
+    box-shadow: 1px 1px 15px #4c577c;
+}
+.header__btn:focus{
+    outline: none;
+}
+.header__btn:active{
+    box-shadow: 1px 1px 15px #4c577c;
+    background-color:#4c577c;
+}
+/* .header__btn_add{}
+.search{}
+.search__icon{} */
+.search__input{
+    width: 250px;
+}
+.search__input:focus{
+    outline: none;
+}
+.section-calendar{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.calendar{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+}
+.calendar-controls{
+    display: flex;
+    align-items: center;
+    width: 215px;
+    justify-content: space-between;
+}
+.calendar__btn{
+    width: 23px;
+    height: 23px;
+}
+.calendar__btn-current-day{
+    padding: 0;
+    margin: 0 10px;
+}
+/* .calendar__btn_prev{}
+.calendar__btn_next{} */
+.calendar__date{
+    padding: 15px 10px;
+    display: flex;
+    font-size: 20px;
+    font-weight: 600;
+}
+.calendar-table{
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    height: 100%;
+    padding-bottom: 10px;
+}
+.table__cell{
+    width: 14.28%;
+    height: 20%;
+    box-sizing: border-box;
+    border: 1px solid #c2c2c2;
+    padding: 5px;
+}
+.table__cell_active{
+    font-weight: 900;
+    background-color:#e7e2e2;
+}
+/* .table__cell-number{}
+.table__cell-day{} */
+.table__cell_event{
+    display:block;
+    border: 2px solid #899efc;
+    background-color:rgb(189, 229, 255)
+}
+.event-container{
+    display:flex;
+    flex-direction: column; 
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: auto;
+}
+.text-event{
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+.table__cell-event_active{
+    border: 2px solid #899efc;
+    background-color:rgb(189, 229, 255);
+    font-size: 18px;
+    font-weight: bold;
+
+
+}
+.hidden-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    width: 290px;
+    height: 320px;
+    background-color: #fff;
+    padding: 15px;
+    visibility: visible;
+    border:2px solid #b1afaf;
+    box-shadow:3px 2px 15px #c2c2c2;
+    border-radius: 4px;
+}
+.hidden-menu-rect{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-color: #fff;
+    border:2px solid #b1afaf;
+    border-right: none;
+    border-top: none;
+    
+}
+.hidden-menu-rect_left-top{
+    top:25px;
+    left:-11px;
+    transform: rotate(45deg);
+}
+.hidden-menu-rect_right-top{
+    top:25px;
+    right:-11px;
+    transform: rotate(225deg);
+}
+.hidden-menu-rect_right-bottom{
+    bottom:25px;
+    right:-11px;
+    transform: rotate(225deg);
+}
+.hidden-menu-rect_left-bottom{
+    bottom:25px;
+    left:-11px;
+    transform: rotate(45deg);
+}
+.hidden-menu__btn-close{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+.hidden-menu__btn-close_img{
+    width: 10px
+}
+.hidden-menu-data-block{
+    margin:5px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 90px;
+    justify-content: space-between;
+}
+.hidden-menu_input{
+    width: 94%;
+    padding: 0 5px;
+    border-radius: 4px;
+}
+.hidden-menu__textarea{
+    width: 94%;
+    border-radius: 4px;
+    padding: 0 5px;
+    resize: none;
+}
+.hidden-menu-btn-block{
+
+}
+.hidden-menu-btn-block_done{
+
+}
+.hidden-menu-btn-block_delete{
+
+}
+.hidden{
+    visibility: hidden;
+}

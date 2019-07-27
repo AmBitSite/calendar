@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <button class="header__btn header__btn_add">Добавить</button>
+            <div class="search">
+                <i class="search__icon"></i>
+                <input class="search__input" type="text" placeholder="Событие, дата или учасник">
+            </div>
+        </header>
+        <section class="section-calendar">
+            <header class="calendar">
+                <div class="calendar-controls">
+                    <button class="calendar__btn calendar__btn_prev"></button>
+                    <span class="calendar__date">date</span>
+                    <button class="calendar__btn calendar__btn_next"></button>
+                </div>
+                <button class="calendar__btn-current-day">cегодня</button>
+            </header>
+            <div class="calendar-table">
+            </div>
+        </section>
+    </div>
+    <div class="hidden-menu hidden">
+        <div class="hidden-menu-rect hidden-menu-rect_left-top"></div>
+        <div class="hidden-menu-data-block">
+            <a class="hidden-menu__btn-close" role="button"><img class="hidden-menu__btn-close_img" src="img/close.png" alt="close"></a>
+            <input class="hidden-menu_input hidden-menu-data-block__event" type="text" placeholder="Событие">
+            <input disabled class="hidden-menu_input hidden-menu-data-block__date" type="text" placeholder="День, Месяц, Год">
+            <input class="hidden-menu_input hidden-menu-data-block__name-members" type="text" placeholder="Имена участников">
+        </div>
+        <textarea  class="hidden-menu__textarea" cols="25" rows="6" placeholder="Описание" ></textarea>
+        <div class="hidden-menu-btn-block">
+            <button class="hidden-menu-btn-block_done">Готово</button>
+            <button class="hidden-menu-btn-block_delete">Удалить</button>
+        </div>
+    </div>
+    <script src="script/script.js"></script>
+</body>
+
+</html>
