@@ -23,8 +23,8 @@ let today = nowDate.getDate(),
     firstDay = firstDayiInMonth.getDay(),
     countdaysNextMonth=1,
     eventDay = '',
-    objEvents = {},
-    tempCurrentMonth = currentMonth+1;
+    objEvents = {}
+    // tempCurrentMonth = currentMonth+1;
     let countDayPrevMonthiInMonth = new Date(currentYear, currentMonth-2, 0)
     let countDayPrevMonth = countDayPrevMonthiInMonth.getDate()
 
@@ -120,48 +120,69 @@ function createDayInCalendar(elemParent, count){
     elemParent.appendChild(cell);
     cell.appendChild(cellNumber);
     cell.children[1].innerText = count;
-    if(tempCurrentMonth==13){tempCurrentMonth=1; currentYear++}
-    if(tempCurrentMonth===0){tempCurrentMonth=12; currentYear--}
-    cell.setAttribute("data-index", `${count}.${tempCurrentMonth}.${currentYear}`)
-    if(count === countDayPrevMonth){tempCurrentMonth++}
+    // if(tempCurrentMonth==13){tempCurrentMonth=1; currentYear++;}
+    // if(tempCurrentMonth===0){tempCurrentMonth=12; currentYear--;}
+    // if(tempCurrentMonth===-1){tempCurrentMonth=11; currentYear--;}
+    // if(currentMonth ===-1){currentMonth=11; tempCurrentMonth = 12; currentYear--;}
+    // if(currentMonth ===12){currentMonth=0; tempCurrentMonth = 12; currentYear++;}
+    
+    // if(currentMonth ===12){currentMonth=0; currentYear++;}
+    // cell.setAttribute("data-index", `${count}.${tempCurrentMonth}.${currentYear}`)
+    cell.setAttribute("data-index", `${count}.${currentMonth+1}.${currentYear}`)
+    let testt = JSON.parse(`${localStorage.getItem("test")}`) || objEvents
+    if(testt.hasOwnProperty(cell.getAttribute("data-index"))){
+        createEventInCell(cell, testt[cell.getAttribute("data-index")])
+    }
+    // if(count === countDayPrevMonth){tempCurrentMonth++}
+    // if(count === countDayPrevMonth){currentMonth++}
 }
 function createCalendar(calendar, lastDay, countDay, newLastDay){
     if(countDay == 0)countDay = 7
     let magicNumber = countDay - 2
     let firstDayinNewMonth = newLastDay-magicNumber
     let tempFirstDayinNewMonth = firstDayinNewMonth
-    if(currentMonth == 12){currentMonth=0}
-    for(let i = 1; i<countDay; i++){
-        if(countDay<=lastDay && calendar.children.length===quantityCellsInTable) tempCurrentMonth++
-        createDayInCalendar(calendar, tempFirstDayinNewMonth++)
-        if(i==countDay-1) {tempFirstDayinNewMonth = firstDayinNewMonth}
+    if(currentMonth ===0){currentMonth=12; currentYear--;}
+    if(currentMonth ===-1){currentMonth=11; currentYear--;}
+    if(countDay !==1){
+        currentMonth--
+        for(let i = 1; i<countDay; i++){
+            createDayInCalendar(calendar, tempFirstDayinNewMonth++)
+            if(i==countDay-1) {currentMonth++}
+        }
     }
+    if(currentMonth == 12){currentMonth=0;currentYear++}
+    previewDate.innerText = `${objDate.month[currentMonth].name} ${currentYear}`;
     for(countDay = 1;countDay<=lastDay;countDay++){
-        if(tempCurrentMonth<currentMonth)tempCurrentMonth+=2
+        // if(tempCurrentMonth<currentMonth)tempCurrentMonth+=2
         if(calendar.children.length<quantityCellsInTable){createDayInCalendar(calendar, countDay)}
         countDayPrevMonth = lastDay
+        while(countDay===lastDay){
+            currentMonth++
+            break
+        }
     }
+    
     countdaysNextMonth =1
     for(let countCells = calendar.children.length; countCells<quantityCellsInTable;countCells++){
         createDayInCalendar(calendar, countdaysNextMonth)
         countdaysNextMonth++
     }
     namingDaysOfTheWeek(calendar)
-    if(nowDate.getMonth() === currentMonth && nowDate.getFullYear() === currentYear){
+    if(nowDate.getMonth() === currentMonth-1 && nowDate.getFullYear() === currentYear){
         calendar.children[today-1].classList.add("table__cell_active");
     }
     calendar.addEventListener("click", (e)=>{
         addListenerCalendarCells(e)
     })
-    previewDate.innerText = `${objDate.month[currentMonth].name} ${currentYear}`;
 }
 
 createCalendar(calendar, lastDay, firstDay, firstDay)
 
 nextMonthBtn.addEventListener("click", () => {
-    currentMonth++
-    tempCurrentMonth--
-    if(tempCurrentMonth<currentMonth)tempCurrentMonth++
+    // currentMonth++
+    // tempCurrentMonth--
+    // tempCurrentMonth = currentMonth
+    // if(tempCurrentMonth<currentMonth)tempCurrentMonth++
     document.querySelector(".hidden-menu").classList.add("hidden")
     let firstDayiInMonth = new Date(currentYear, currentMonth, 1),
     lastDayiInMonth = new Date(currentYear, currentMonth+1, 0),
@@ -169,18 +190,19 @@ nextMonthBtn.addEventListener("click", () => {
     lastDay = lastDayiInMonth.getDate(),
     newlastDayiInMonth = new Date(currentYear, currentMonth, 0),
     newLastDay = newlastDayiInMonth.getDate();
+    if(firstDay === 1 ){tempCurrentMonth = currentMonth-1}
     createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay);
 })
 
 prevMonthBtn.addEventListener("click", () => {
-    currentMonth--
-    tempCurrentMonth = currentMonth
-    if(currentMonth ===-1){currentMonth=11; tempCurrentMonth = 11; currentYear--}
+    currentMonth-=2
+    // tempCurrentMonth = currentMonth
     document.querySelector(".hidden-menu").classList.add("hidden")
     let firstDayiInMonth = new Date(currentYear, currentMonth, 1),
     lastDayiInMonth = new Date(currentYear, currentMonth+1, 0),
     firstDay = firstDayiInMonth.getDay();
-    if(firstDay === 1 )tempCurrentMonth++
+    // if(firstDay === 1)tempCurrentMonth++
+    // if(firstDay === 1 && tempCurrentMonth ===0){tempCurrentMonth--}
     let lastDay = lastDayiInMonth.getDate(),
     newlastDayiInMonth = new Date(currentYear, currentMonth, 0),
     newLastDay = newlastDayiInMonth.getDate()
@@ -190,12 +212,20 @@ prevMonthBtn.addEventListener("click", () => {
 currentDayBtn.addEventListener("click", ()=>{
     currentMonth = nowDate.getMonth();
     currentYear = nowDate.getFullYear();
+    lastDayiInMonth = new Date(currentYear, currentMonth+1, 0),
+    lastDay = lastDayiInMonth.getDate(),
+    firstDayiInMonth = new Date(currentYear, currentMonth, 1),
+    firstDay = firstDayiInMonth.getDay(),
+    // tempCurrentMonth = currentMonth+1;
+    countDayPrevMonthiInMonth = new Date(currentYear, currentMonth-2, 0)
+    countDayPrevMonth = countDayPrevMonthiInMonth.getDate()
+    hiddenMenu.classList.add("hidden")
     createCalendar(reRenderCalendar(), lastDay, firstDay, firstDay)
 })
 document.querySelector(".hidden-menu__btn-close").addEventListener("click", ()=>{
     document.querySelector(".hidden-menu").classList.add("hidden")
 })
-function createEventInCell(element){
+function createEventInCell(element, obj){
     if(element.children[2])eventDay.children[2].remove()
     let eventContainer = document.createElement("div"),
     eventHeader = document.createElement("span"),
@@ -207,8 +237,8 @@ function createEventInCell(element){
     eventContainer.appendChild(eventMembers)
     element.appendChild(eventContainer)
     element.classList.add("table__cell-event_active")
-    eventHeader.innerText = objEvents[inputDate.value].event
-    eventMembers.innerText = objEvents[inputDate.value].members
+    eventHeader.innerText = obj.event
+    eventMembers.innerText = obj.members
 }
 createEventInCalendar.addEventListener("click", ()=>{
     objEvents[inputDate.value] = {};
@@ -216,10 +246,17 @@ createEventInCalendar.addEventListener("click", ()=>{
     objEvents[inputDate.value].members = inputMembers.value
     objEvents[inputDate.value].discription = textareaDescription.value
     hiddenMenu.classList.add("hidden")
-    createEventInCell(eventDay)
+    createEventInCell(eventDay, objEvents[inputDate.value])
+    let test = JSON.stringify(objEvents)
+    localStorage.setItem("test", test)
 })
+
 deleteEventInCalendar.addEventListener("click", ()=>{
     if(eventDay.children[2]){
+        let testt = JSON.parse(`${localStorage.getItem("test")}`)
+        delete testt[eventDay.children[2].parentNode.getAttribute("data-index")]
+        let test = JSON.stringify(testt)
+        localStorage.setItem("test", test)
         eventDay.children[2].remove()
         eventDay.classList.remove("table__cell-event_active")
     }
