@@ -44,14 +44,59 @@ body{
     box-shadow: 1px 1px 15px #4c577c;
     background-color:#4c577c;
 }
-/* .header__btn_add{}
-.search{}
-.search__icon{} */
+.header__btn_refresh{
+    margin-left:10px;
+}
+.search{
+    display: flex;
+    align-items: center
+}
+.search__icon{
+    display: flex;
+    background-image: url(../img/search.png);
+    background-size: contain;
+    width:20px;
+    height:20px;
+    margin-right: 5px
+} 
 .search__input{
     width: 250px;
 }
 .search__input:focus{
     outline: none;
+}
+.search-container{
+    width:265px;
+    max-height: 500px;
+    min-height: 50px;
+    border: 1px solid #c2c2c2;
+    position: absolute;
+    top:85px;
+    right:25px;
+    background-color: #fff;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    box-shadow: 2px 2px 3px #c2c2c2, -2px 2px 3px #c2c2c2;
+    cursor: pointer;
+}
+.search-container-item{
+    border-bottom: 1px solid #c2c2c2;
+    width: 99%;
+}
+.search-container-item__header{
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-size: 19px;
+    margin:6px 0;
+}
+.search-container-item_active{
+    background-color: #5d9dda;
+    color:#fff
 }
 .section-calendar{
     width: 95%;
@@ -79,8 +124,16 @@ body{
     padding: 0;
     margin: 0 10px;
 }
-/* .calendar__btn_prev{}
-.calendar__btn_next{} */
+.calendar__btn_prev-triangle{
+	border-top: 5px solid transparent;
+	border-right: 6px solid #000;
+	border-bottom: 5px solid transparent;
+}
+.calendar__btn_next-triangle{
+	border-top: 5px solid transparent;
+	border-left: 6px solid #000;
+	border-bottom: 5px solid transparent;
+}
 .calendar__date{
     padding: 15px 10px;
     display: flex;
@@ -105,8 +158,6 @@ body{
     font-weight: 900;
     background-color:#e7e2e2;
 }
-/* .table__cell-number{}
-.table__cell-day{} */
 .table__cell_event{
     display:block;
     border: 2px solid #899efc;
@@ -130,8 +181,6 @@ body{
     background-color:rgb(189, 229, 255);
     font-size: 18px;
     font-weight: bold;
-
-
 }
 .hidden-menu{
     display: flex;
@@ -155,7 +204,6 @@ body{
     border:2px solid #b1afaf;
     border-right: none;
     border-top: none;
-    
 }
 .hidden-menu-rect_left-top{
     top:25px;
@@ -206,14 +254,44 @@ body{
     padding: 0 5px;
     resize: none;
 }
-.hidden-menu-btn-block{
-
+.hidden-menu-add{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    left: 40px;
+    top: 80px;
+    background-color: #fff;
+    border: 1px solid #b1afaf;
+    box-shadow: -2px 3px 3px #b1afaf, 2px 3px 3px #b1afaf;
+    border-radius: 3px
 }
-.hidden-menu-btn-block_done{
-
+.hidden-menu-add__rect{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-color: #fff;
+    border:2px solid #b1afaf;
+    border-right: none;
+    border-top: none;
+    top:-11px;
+    left:30px;
+    transform: rotate(135deg);
 }
-.hidden-menu-btn-block_delete{
-
+.hidden-menu-add__btn-close{
+    align-self: flex-end;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.hidden-menu-add__input{
+    width: 250px;
+    align-self: center
+}
+.hidden-menu-add__btn-create{
+    width: 75px;
+    margin-left: 25px;
+    margin-top: 10px;
 }
 .hidden{
     visibility: hidden;
