@@ -1,1 +1,1 @@
-# manual testing status
+# https://ambitsite.github.io/calendar/
