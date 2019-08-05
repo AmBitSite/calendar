@@ -14,8 +14,7 @@ const calendar = document.querySelector(".calendar-table"),
     createEventInCalendar = document.querySelector(".hidden-menu-btn-block_done"),
     deleteEventInCalendar = document.querySelector(".hidden-menu-btn-block_delete"),
     quantityCellsInTable = 35,
-    nowDate = new Date();
-
+    nowDate = new Date()
 let today = nowDate.getDate(),
     currentMonth = nowDate.getMonth(),
     currentYear = nowDate.getFullYear(),
@@ -23,7 +22,7 @@ let today = nowDate.getDate(),
     lastDay = lastDayiInMonth.getDate(),
     newlastDayiInMonth = new Date(currentYear, currentMonth, 0),
     newLastDay = newlastDayiInMonth.getDate(),
-firstDayiInMonth = new Date(currentYear, currentMonth, 1),
+    firstDayiInMonth = new Date(currentYear, currentMonth, 1),
     firstDay = firstDayiInMonth.getDay(),
     countdaysNextMonth = 1,
     eventDay = '',
@@ -75,7 +74,7 @@ function addListenerCalendarCells(e) {
     let elem = document.querySelector(".table__cell_event")
     if (elem !== null) elem.classList.remove("table__cell_event")
     hiddenMenu.classList.remove("hidden")
-    let element = e.target;
+    let element = e.target
     function fillingHiddenMenu(element) {
         inputDate.value = element.getAttribute("data-index")
         let elementClientRect = element.getBoundingClientRect()
@@ -83,11 +82,11 @@ function addListenerCalendarCells(e) {
         if (window.matchMedia("(min-width:900px)").matches) {
             function positionVerticalHiddenMenu(className) {
                 if (elementClientRect.y + 320 > ParentElementRect.height) {
-                    hiddenMenu.style.top = `${elementClientRect.y - 240}px`;
+                    hiddenMenu.style.top = `${elementClientRect.y - 240}px`
                     rectHiddenMenu.classList.remove(`${rectHiddenMenu.classList[1]}`)
                     rectHiddenMenu.classList.add(className)
                 }
-                else { hiddenMenu.style.top = `${elementClientRect.y - 20}px`; }
+                else { hiddenMenu.style.top = `${elementClientRect.y - 20}px`}
             }
             if ((elementClientRect.right + 290) > ParentElementRect.right) {
                 hiddenMenu.style.left = `${elementClientRect.x - 290 - 15}px`
@@ -101,10 +100,10 @@ function addListenerCalendarCells(e) {
             }
         }
         element.classList.add("table__cell_event")
-        inputEvent.value = '';
-        inputMembers.value = '';
-        textareaDescription.value = '';
-        eventDay = element;
+        inputEvent.value = ''
+        inputMembers.value = ''
+        textareaDescription.value = ''
+        eventDay = element
         if (element.children[2]) {
             inputEvent.value = objEvents[inputDate.value].event
             inputMembers.value = objEvents[inputDate.value].members
@@ -117,19 +116,19 @@ function addListenerCalendarCells(e) {
     }
 }
 function reRenderCalendar() {
-    document.querySelector(".calendar-table").remove();
-    let newCalendar = document.createElement("div");
-    newCalendar.classList.add("calendar-table");
-    calendarContainer.appendChild(newCalendar);
+    document.querySelector(".calendar-table").remove()
+    let newCalendar = document.createElement("div")
+    newCalendar.classList.add("calendar-table")
+    calendarContainer.appendChild(newCalendar)
     return newCalendar
 }
 function renewalCountsDays() {
-    firstDayiInMonth = new Date(currentYear, currentMonth, 1),
-    lastDayiInMonth = new Date(currentYear, currentMonth + 1, 0),
-    firstDay = firstDayiInMonth.getDay(),
-    lastDay = lastDayiInMonth.getDate(),
-    newlastDayiInMonth = new Date(currentYear, currentMonth, 0),
-    newLastDay = newlastDayiInMonth.getDate();
+    firstDayiInMonth = new Date(currentYear, currentMonth, 1)
+    lastDayiInMonth = new Date(currentYear, currentMonth + 1, 0)
+    firstDay = firstDayiInMonth.getDay()
+    lastDay = lastDayiInMonth.getDate()
+    newlastDayiInMonth = new Date(currentYear, currentMonth, 0)
+    newLastDay = newlastDayiInMonth.getDate()
     countDayPrevMonthiInMonth = new Date(currentYear, currentMonth - 2, 0)
     countDayPrevMonth = countDayPrevMonthiInMonth.getDate()
 }
@@ -152,7 +151,7 @@ function createEventInCell(element, obj) {
     let eventContainer = document.createElement("div"),
         eventHeader = document.createElement("span"),
         eventMembers = document.createElement("span")
-    eventContainer.classList.add("event-container");
+    eventContainer.classList.add("event-container")
     eventHeader.classList.add("text-event")
     eventMembers.classList.add("text-event")
     eventContainer.appendChild(eventHeader)
@@ -167,16 +166,16 @@ function parseLocalStorage() {
     return arrLocalStorage
 }
 function createDayInCalendar(elemParent, count) {
-    let cell = document.createElement("div");
-    let cellNumber = document.createElement("span");
-    let cellDay = document.createElement("span");
+    let cell = document.createElement("div")
+    let cellNumber = document.createElement("span")
+    let cellDay = document.createElement("span")
     cell.appendChild(cellDay);
-    cell.classList.add("table__cell");
-    elemParent.appendChild(cell);
-    cell.appendChild(cellNumber);
-    cell.children[1].innerText = count;
+    cell.classList.add("table__cell")
+    elemParent.appendChild(cell)
+    cell.appendChild(cellNumber)
+    cell.children[1].innerText = count
     if (nowDate.getMonth() === currentMonth && nowDate.getFullYear() === currentYear && count === today) {
-        cell.classList.add("table__cell_active");
+        cell.classList.add("table__cell_active")
     }
     cell.setAttribute("data-index", `${count}.${currentMonth + 1}.${currentYear}`)
     let arrLocalStorage = parseLocalStorage() || objEvents
@@ -222,22 +221,22 @@ function createCalendar(calendar, lastDay, countDay, newLastDay) {
 createCalendar(calendar, lastDay, firstDay, newLastDay)
 
 nextMonthBtn.addEventListener("click", (e) => {
-    e.stopImmediatePropagation();
+    e.stopImmediatePropagation()
     document.querySelector(".hidden-menu").classList.add("hidden")
     renewalCountsDays()
     if (firstDay === 1) { tempCurrentMonth = currentMonth - 1 }
-    createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay);
+    createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay)
 })
 prevMonthBtn.addEventListener("click", () => {
     currentMonth -= 2
     document.querySelector(".hidden-menu").classList.add("hidden")
     renewalCountsDays()
     countDayPrevMonth = newLastDay
-    createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay);
+    createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay)
 })
 currentDayBtn.addEventListener("click", () => {
-    currentMonth = nowDate.getMonth();
-    currentYear = nowDate.getFullYear();
+    currentMonth = nowDate.getMonth()
+    currentYear = nowDate.getFullYear()
     renewalCountsDays()
     hiddenMenu.classList.add("hidden")
     createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay)
@@ -347,8 +346,8 @@ document.querySelector(".search__input").addEventListener("click", (e) => {
                     currentMonth = +arrEventData[1] - 1
                     currentYear = +arrEventData[2]
                     renewalCountsDays()
-                    createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay);
-                    document.querySelector(".search-container").remove();
+                    createCalendar(reRenderCalendar(), lastDay, firstDay, newLastDay)
+                    document.querySelector(".search-container").remove()
                 }
                 elementItem = elementItem.parentNode
             }
@@ -358,25 +357,24 @@ document.querySelector(".search__input").addEventListener("click", (e) => {
 
 document.querySelector(".wrapper").addEventListener("click", () => {
     if (document.querySelector(".search-container")) {
-        document.querySelector(".search-container").remove();
+        document.querySelector(".search-container").remove()
         search.value = ''
     }
 })
 search.addEventListener("keyup", () => {
-    let xxx = document.querySelector(".search-container")
+    let parentWrapEvent = document.querySelector(".search-container")
     let ClassActive = document.querySelector(".search-container-item_active")
     if (ClassActive !== null) ClassActive.classList.remove("search-container-item_active")
-    for (let i = 0; i < xxx.children.length; i++) {
-        // let xx;
-        let xx = xxx.children[i].children[0].innerText.search(search.value)
-        // xx = xxx.children[i].children[0].innerText.match(/`${search.value}`/i)
+    for (let i = 0; i < parentWrapEvent.children.length; i++) {
+        let resSearchEvent = parentWrapEvent.children[i].children[0].innerText.search(search.value)
+        let resSearchDate = parentWrapEvent.children[i].children[1].innerText.search(search.value)
         if (search.value === '' && ClassActive !== null) ClassActive.classList.remove("search-container-item_active")
-        if (xx === 0 && search.value !== '') {
+        if ((resSearchEvent === 0 && search.value !== '')||(resSearchDate === 0 && search.value !== '')) {
             if (ClassActive !== null) ClassActive.classList.remove("search-container-item_active")
-            let del = xxx.children[i]
-            xxx.children[i].remove()
+            let del = parentWrapEvent.children[i]
+            parentWrapEvent.children[i].remove()
             del.classList.add("search-container-item_active")
-            xxx.insertBefore(del, xxx.children[0])
+            parentWrapEvent.insertBefore(del, parentWrapEvent.children[0])
         }
     }
 })
